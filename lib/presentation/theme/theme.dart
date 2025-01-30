@@ -6,6 +6,7 @@ import 'font_styles.dart';
 
 final theme = ThemeData(
     useMaterial3: true,
+    scaffoldBackgroundColor: ColorPalette.backgroundColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: ColorPalette.primaryColor,
       primary: ColorPalette.primaryColor,
