@@ -20,9 +20,9 @@ class StationModel {
     String? title,
     String? address,
     num? price,
-    Coordinates? coordinates,
+    CoordinatesModel? coordinates,
     bool? isPublic,
-    List<Connectors>? connectors,
+    List<ConnectorsModel>? connectors,
     String? imageUrl,
   }) {
     _id = id;
@@ -41,13 +41,13 @@ class StationModel {
     _address = json['address'];
     _price = json['price'];
     _coordinates = json['coordinates'] != null
-        ? Coordinates.fromJson(json['coordinates'])
+        ? CoordinatesModel.fromJson(json['coordinates'])
         : null;
     _isPublic = json['isPublic'];
     if (json['connectors'] != null) {
       _connectors = [];
       json['connectors'].forEach((v) {
-        _connectors?.add(Connectors.fromJson(v));
+        _connectors?.add(ConnectorsModel.fromJson(v));
       });
     }
     _imageUrl = json['image_url'];
@@ -57,9 +57,9 @@ class StationModel {
   String? _title;
   String? _address;
   num? _price;
-  Coordinates? _coordinates;
+  CoordinatesModel? _coordinates;
   bool? _isPublic;
-  List<Connectors>? _connectors;
+  List<ConnectorsModel>? _connectors;
   String? _imageUrl;
 
   StationModel copyWith({
@@ -67,9 +67,9 @@ class StationModel {
     String? title,
     String? address,
     num? price,
-    Coordinates? coordinates,
+    CoordinatesModel? coordinates,
     bool? isPublic,
-    List<Connectors>? connectors,
+    List<ConnectorsModel>? connectors,
     String? imageUrl,
   }) =>
       StationModel(
@@ -91,11 +91,11 @@ class StationModel {
 
   num? get price => _price;
 
-  Coordinates? get coordinates => _coordinates;
+  CoordinatesModel? get coordinates => _coordinates;
 
   bool? get isPublic => _isPublic;
 
-  List<Connectors>? get connectors => _connectors;
+  List<ConnectorsModel>? get connectors => _connectors;
 
   String? get imageUrl => _imageUrl;
 
@@ -121,13 +121,13 @@ class StationModel {
 /// type : "CCS"
 /// maxPower : 150
 
-Connectors connectorsFromJson(String str) =>
-    Connectors.fromJson(json.decode(str));
+ConnectorsModel connectorsFromJson(String str) =>
+    ConnectorsModel.fromJson(json.decode(str));
 
-String connectorsToJson(Connectors data) => json.encode(data.toJson());
+String connectorsToJson(ConnectorsModel data) => json.encode(data.toJson());
 
-class Connectors {
-  Connectors({
+class ConnectorsModel {
+  ConnectorsModel({
     String? id,
     String? type,
     num? maxPower,
@@ -137,7 +137,7 @@ class Connectors {
     _maxPower = maxPower;
   }
 
-  Connectors.fromJson(dynamic json) {
+  ConnectorsModel.fromJson(dynamic json) {
     _id = json['id'];
     _type = json['type'];
     _maxPower = json['maxPower'];
@@ -147,12 +147,12 @@ class Connectors {
   String? _type;
   num? _maxPower;
 
-  Connectors copyWith({
+  ConnectorsModel copyWith({
     String? id,
     String? type,
     num? maxPower,
   }) =>
-      Connectors(
+      ConnectorsModel(
         id: id ?? _id,
         type: type ?? _type,
         maxPower: maxPower ?? _maxPower,
@@ -176,13 +176,13 @@ class Connectors {
 /// latitude : 50.447166
 /// longitude : 30.522731
 
-Coordinates coordinatesFromJson(String str) =>
-    Coordinates.fromJson(json.decode(str));
+CoordinatesModel coordinatesFromJson(String str) =>
+    CoordinatesModel.fromJson(json.decode(str));
 
-String coordinatesToJson(Coordinates data) => json.encode(data.toJson());
+String coordinatesToJson(CoordinatesModel data) => json.encode(data.toJson());
 
-class Coordinates {
-  Coordinates({
+class CoordinatesModel {
+  CoordinatesModel({
     num? latitude,
     num? longitude,
   }) {
@@ -190,7 +190,7 @@ class Coordinates {
     _longitude = longitude;
   }
 
-  Coordinates.fromJson(dynamic json) {
+  CoordinatesModel.fromJson(dynamic json) {
     _latitude = json['latitude'];
     _longitude = json['longitude'];
   }
@@ -198,11 +198,11 @@ class Coordinates {
   num? _latitude;
   num? _longitude;
 
-  Coordinates copyWith({
+  CoordinatesModel copyWith({
     num? latitude,
     num? longitude,
   }) =>
-      Coordinates(
+      CoordinatesModel(
         latitude: latitude ?? _latitude,
         longitude: longitude ?? _longitude,
       );
