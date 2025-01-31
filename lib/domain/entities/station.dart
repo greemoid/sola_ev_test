@@ -6,6 +6,7 @@ class Station extends Equatable {
   final String? id;
   final String? title;
   final String? address;
+  final double? price;
   final Coordinates? coordinates;
   final bool? isPublic;
   final List<Connector>? connectors;
@@ -16,6 +17,7 @@ class Station extends Equatable {
       {required this.id,
       required this.title,
       required this.address,
+      required this.price,
       required this.coordinates,
       required this.isPublic,
       required this.connectors,
@@ -38,6 +40,7 @@ class Station extends Equatable {
     String? id,
     String? title,
     String? address,
+    double? price,
     Coordinates? coordinates,
     bool? isPublic,
     List<Connector>? connectors,
@@ -48,6 +51,7 @@ class Station extends Equatable {
       id: id ?? this.id,
       title: title ?? this.title,
       address: address ?? this.address,
+      price: price ?? this.price,
       coordinates: coordinates ?? this.coordinates,
       isPublic: isPublic ?? this.isPublic,
       connectors: connectors ?? this.connectors,

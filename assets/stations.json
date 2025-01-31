@@ -3,6 +3,7 @@
     "id": "station-001",
     "title": "ECO Charge Hub",
     "address": "вул. Хрещатик, 22, Київ, 01001",
+    "price": 0.24,
     "coordinates": {
       "latitude": 50.447166,
       "longitude": 30.522731
@@ -26,6 +27,7 @@
     "id": "station-002",
     "title": "Ocean Plaza Charger",
     "address": "вул. Антоновича, 176, Київ, 03150",
+    "price": 0.31,
     "coordinates": {
       "latitude": 50.4116,
       "longitude": 30.5233
@@ -44,6 +46,7 @@
     "id": "station-003",
     "title": "Dream Town Station",
     "address": "просп. Оболонський, 21б, Київ, 04205",
+    "price": 0.22,
     "coordinates": {
       "latitude": 50.5089,
       "longitude": 30.4982
@@ -62,6 +65,7 @@
     "id": "station-004",
     "title": "Retroville Charging",
     "address": "просп. Правди, 47, Київ, 04208",
+    "price": 0.17,
     "coordinates": {
       "latitude": 50.5163,
       "longitude": 30.4303
@@ -85,6 +89,7 @@
     "id": "station-005",
     "title": "Arena City Power",
     "address": "вул. Велика Васильківська, 5, Київ, 01004",
+    "price": 0.26,
     "coordinates": {
       "latitude": 50.4391,
       "longitude": 30.5219
@@ -103,6 +108,7 @@
     "id": "station-006",
     "title": "Private Office Hub",
     "address": "вул. Євгена Сверстюка, 2А, Київ, 02002",
+    "price": 0.36,
     "coordinates": {
       "latitude": 50.4525,
       "longitude": 30.5925
@@ -121,6 +127,7 @@
     "id": "station-007",
     "title": "Lavina Mall Express",
     "address": "вул. Берковецька, 6Д, Київ, 04128",
+    "price": 0.26,
     "coordinates": {
       "latitude": 50.5085,
       "longitude": 30.3663
@@ -144,6 +151,7 @@
     "id": "station-008",
     "title": "River Mall Charge",
     "address": "Дніпровська набережна, 12, Київ, 02081",
+    "price": 0.36,
     "coordinates": {
       "latitude": 50.4076,
       "longitude": 30.6156
@@ -162,6 +170,7 @@
     "id": "station-009",
     "title": "Art Mall Power",
     "address": "вул. Заболотного, 37, Київ, 03187",
+    "price": 0.33,
     "coordinates": {
       "latitude": 50.3482,
       "longitude": 30.4665
@@ -180,6 +189,7 @@
     "id": "station-010",
     "title": "Smart Plaza Station",
     "address": "вул. Політехнічна, 21, Київ, 03056",
+    "price": 0.24,
     "coordinates": {
       "latitude": 50.4489,
       "longitude": 30.4561
@@ -198,6 +208,7 @@
     "id": "station-011",
     "title": "Podil Plaza Hub",
     "address": "Контрактова площа, 12, Київ, 04070",
+    "price": 0.20,
     "coordinates": {
       "latitude": 50.4651,
       "longitude": 30.5165
@@ -216,6 +227,7 @@
     "id": "station-012",
     "title": "Lesnaya Station",
     "address": "вул. Братиславська, 3, Київ, 02156",
+    "price": 0.12,
     "coordinates": {
       "latitude": 50.4789,
       "longitude": 30.6324
@@ -234,6 +246,7 @@
     "id": "station-013",
     "title": "Darynok Power",
     "address": "вул. Біломорська, 1, Київ, 02094",
+    "price": 0.19,
     "coordinates": {
       "latitude": 50.4841,
       "longitude": 30.5986
@@ -252,6 +265,7 @@
     "id": "station-014",
     "title": "Respublika Park Charge",
     "address": "вул. Кільцева дорога, 1, Київ, 03134",
+    "price": 0.17,
     "coordinates": {
       "latitude": 50.3967,
       "longitude": 30.4547
@@ -275,6 +289,7 @@
     "id": "station-015",
     "title": "Private Residence Hub",
     "address": "вул. Драгомирова, 20, Київ, 01103",
+    "price": 0.31,
     "coordinates": {
       "latitude": 50.4086,
       "longitude": 30.5438
@@ -293,6 +308,7 @@
     "id": "station-016",
     "title": "Prospect Hub",
     "address": "просп. Палладіна, 22, Київ, 03680",
+    "price": 0.33,
     "coordinates": {
       "latitude": 50.4647,
       "longitude": 30.3551
@@ -311,6 +327,7 @@
     "id": "station-017",
     "title": "Lukianivska Plaza Station",
     "address": "вул. Січових Стрільців, 50, Київ, 04053",
+    "price": 0.37,
     "coordinates": {
       "latitude": 50.4587,
       "longitude": 30.4843
@@ -334,6 +351,7 @@
     "id": "station-018",
     "title": "Osokorky Hub",
     "address": "просп. Бажана, 36, Київ, 02140",
+    "price": 0.31,
     "coordinates": {
       "latitude": 50.3977,
       "longitude": 30.6163
@@ -352,6 +370,7 @@
     "id": "station-019",
     "title": "Private Business Center",
     "address": "вул. Дегтярівська, 27Т, Київ, 04119",
+    "price": 0.22,
     "coordinates": {
       "latitude": 50.4512,
       "longitude": 30.4681
@@ -370,6 +389,7 @@
     "id": "station-020",
     "title": "Maidan Plaza Station",
     "address": "Майдан Незалежності, 2, Київ, 01001",
+    "price": 0.20,
     "coordinates": {
       "latitude": 50.4505,
       "longitude": 30.5238
