@@ -37,15 +37,17 @@ class StationListItem extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildTitleRow(),
-            const SizedBox(height: 24),
-            _buildDescriptionColumn(),
-            const SizedBox(height: 24),
-            _buildRowOfButtons(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildTitleRow(),
+              const SizedBox(height: 24),
+              _buildDescriptionColumn(),
+              const SizedBox(height: 24),
+              _buildRowOfButtons(),
+            ],
+          ),
         ),
       ),
     );
