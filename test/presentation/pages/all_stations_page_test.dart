@@ -13,9 +13,11 @@ import '../utils/stations_bloc_mock.dart';
 
 void main() {
   late StationsBloc stationsBloc;
+  late TextTheme textTheme;
 
   setUp(() {
     stationsBloc = StationsBlocMock();
+    textTheme = TextTheme();
   });
 
   Widget buildTestWidget(Widget child) {
@@ -35,7 +37,9 @@ void main() {
       initialState: StationsInitial(),
     );
 
-    await tester.pumpWidget(buildTestWidget(const AllStationsPage()));
+    await tester.pumpWidget(buildTestWidget(AllStationsPage(
+      textTheme: textTheme,
+    )));
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -50,7 +54,9 @@ void main() {
       initialState: StationsInitial(),
     );
 
-    await tester.pumpWidget(buildTestWidget(const AllStationsPage()));
+    await tester.pumpWidget(buildTestWidget(AllStationsPage(
+      textTheme: textTheme,
+    )));
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsNothing);
@@ -65,7 +71,9 @@ void main() {
       initialState: StationsInitial(),
     );
 
-    await tester.pumpWidget(buildTestWidget(const AllStationsPage()));
+    await tester.pumpWidget(buildTestWidget(AllStationsPage(
+      textTheme: textTheme,
+    )));
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsNothing);
@@ -83,7 +91,9 @@ void main() {
       initialState: StationsInitial(),
     );
 
-    await tester.pumpWidget(buildTestWidget(const AllStationsPage()));
+    await tester.pumpWidget(buildTestWidget(AllStationsPage(
+      textTheme: textTheme,
+    )));
     await tester.pump();
 
     verify(() => stationsBloc.add(GetAllStationsEvent())).called(1);
@@ -98,14 +108,15 @@ void main() {
       initialState: StationsInitial(),
     );
 
-    await tester.pumpWidget(buildTestWidget(const AllStationsPage()));
+    await tester.pumpWidget(buildTestWidget(AllStationsPage(
+      textTheme: textTheme,
+    )));
 
     streamController.add(StationsLoading());
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
     expect(find.byType(Text), findsNothing);
-
 
     streamController.add(StationsLoaded(stations: stationListMock));
     await tester.pump();
@@ -123,14 +134,15 @@ void main() {
       initialState: StationsInitial(),
     );
 
-    await tester.pumpWidget(buildTestWidget(const AllStationsPage()));
+    await tester.pumpWidget(buildTestWidget(AllStationsPage(
+      textTheme: textTheme,
+    )));
 
     streamController.add(StationsLoading());
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
     expect(find.byType(Text), findsNothing);
-
 
     streamController.add(StationsError(errorMessage: 'Error occurred'));
     await tester.pump();
@@ -142,5 +154,4 @@ void main() {
 
     expect(find.text('Error occurred'), findsOneWidget);
   });
-
 }
