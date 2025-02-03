@@ -1,9 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sola_ev_test/presentation/bloc/stations_bloc.dart';
+import 'package:sola_ev_test/presentation/widgets/station_list_item.dart';
 
 class AllStationsPage extends StatefulWidget {
-  const AllStationsPage({super.key});
+  const AllStationsPage({super.key, required this.textTheme});
+
+  final TextTheme textTheme;
 
   @override
   State<AllStationsPage> createState() => _AllStationsPageState();
@@ -13,7 +18,6 @@ class _AllStationsPageState extends State<AllStationsPage> {
   @override
   void initState() {
     super.initState();
-
     context.read<StationsBloc>().add(GetAllStationsEvent());
   }
 
@@ -39,7 +43,22 @@ class _AllStationsPageState extends State<AllStationsPage> {
           } else if (state is StationsLoaded) {
             return ListView.separated(
                 itemBuilder: (context, index) {
-                  return Text(state.stations[index].title ?? 'Title');
+                  final station = state.stations[index];
+                  final num? maxPower = station.connectors
+                      ?.map((c) => c.maxPower ?? 0)
+                      .reduce((a, b) => max(a, b));
+                  return StationListItem(
+                    title: station.title ?? '',
+                    address: station.address ?? '',
+                    imageUrl: station.imageUrl ?? '',
+                    maxPower: maxPower ?? 0,
+                    textTheme: widget.textTheme,
+                    isFavorite: station.isFavorite,
+                    onFavoritePressed: () {},
+                    onButtonPressed: () {},
+                    onArrowPressed: () {},
+                    price: station.price ?? 0.0,
+                  );
                 },
                 separatorBuilder: (context, index) => SizedBox(
                       height: 8,

@@ -20,10 +20,7 @@ class MyApp extends StatelessWidget {
       create: (_) => serviceLocator<StationsBloc>(),
       child: MaterialApp(
         title: 'Sola',
-        theme: ThemeData(
-          colorScheme: theme.colorScheme,
-          useMaterial3: true,
-        ),
+        theme: theme,
         home: const MyHomePage(title: 'SOLA'),
       ),
     );
@@ -42,7 +39,9 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: theme.primaryColor,
         title: Center(child: Text(title)),
       ),
-      body: AllStationsPage(),
+      body: AllStationsPage(
+        textTheme: Theme.of(context).textTheme,
+      ),
     );
   }
 }

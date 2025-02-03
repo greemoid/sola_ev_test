@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sola_ev_test/presentation/theme/color_palette.dart';
 
 class FontStyles {
   static const double _extraLargeFontSize = 32;
@@ -13,8 +14,9 @@ class FontStyles {
   );
 
   static const TextStyle titleMedium = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     fontSize: _mediumLargeFontSize,
+    color: ColorPalette.mainTextColor,
   );
 
   static const TextStyle bodyLarge = TextStyle(
