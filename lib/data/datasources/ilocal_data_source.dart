@@ -1,5 +1,5 @@
 abstract interface class ILocalDataSource {
-  Future<void> toggleLikeStation(String id);
+  Future<bool> toggleLikeStation(String id);
 
-  Future<List<String>> getLikedStations();
+  List<String>? getLikedStationsIds();
 }
