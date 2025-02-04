@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sola_ev_test/presentation/theme/color_palette.dart';
 
-class StationListItem extends StatelessWidget {
+class StationListItem extends StatefulWidget {
   final String title;
   final String address;
   final String imageUrl;
@@ -27,6 +27,26 @@ class StationListItem extends StatelessWidget {
     required this.onArrowPressed,
     required this.price,
   });
+
+  @override
+  State<StationListItem> createState() => _StationListItemState();
+}
+
+class _StationListItemState extends State<StationListItem> {
+  late bool isItemFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    isItemFavorite = widget.isFavorite;
+  }
+
+  void _toggleLikeUI() {
+    setState(() {
+      isItemFavorite = !isItemFavorite;
+    });
+    widget.onFavoritePressed;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +82,14 @@ class StationListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
-                style: textTheme.titleMedium,
+                widget.title,
+                style: widget.textTheme.titleMedium,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
               Text(
-                address,
-                style: textTheme.bodySmall?.copyWith(
+                widget.address,
+                style: widget.textTheme.bodySmall?.copyWith(
                   color: ColorPalette.secondaryTextColor,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -81,11 +101,11 @@ class StationListItem extends StatelessWidget {
         IconButton(
           icon: Icon(
             Icons.star,
-            color: isFavorite
+            color: isItemFavorite
                 ? ColorPalette.favoriteStarColor
                 : ColorPalette.secondaryTextColor,
           ),
-          onPressed: onFavoritePressed,
+          onPressed: _toggleLikeUI,
         ),
       ],
     );
@@ -94,8 +114,8 @@ class StationListItem extends StatelessWidget {
   Widget _buildDescriptionColumn() {
     return Column(
       children: [
-        _buildInfoRow('icons/lighting.svg', '$maxPower kW'),
-        _buildInfoRow('icons/dollar.svg', '\$$price per kW'),
+        _buildInfoRow('icons/lighting.svg', '${widget.maxPower} kW'),
+        _buildInfoRow('icons/dollar.svg', '\$${widget.price} per kW'),
       ],
     );
   }
@@ -121,7 +141,7 @@ class StationListItem extends StatelessWidget {
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: onButtonPressed,
+            onTap: widget.onButtonPressed,
             child: Container(
               height: 48,
               decoration: BoxDecoration(
@@ -131,14 +151,15 @@ class StationListItem extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 'Call to action',
-                style: textTheme.bodyMedium?.copyWith(color: Colors.black),
+                style:
+                    widget.textTheme.bodyMedium?.copyWith(color: Colors.black),
               ),
             ),
           ),
         ),
         const SizedBox(width: 8),
         GestureDetector(
-          onTap: onArrowPressed,
+          onTap: widget.onArrowPressed,
           child: Container(
             width: 48,
             height: 48,
