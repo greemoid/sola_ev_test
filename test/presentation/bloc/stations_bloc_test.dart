@@ -77,5 +77,51 @@ void main() {
         StationsError(errorMessage: 'There no such station'),
       ],
     );
+
+    blocTest(
+      'ToggleLikeStationEvent should call repository.toggleLike()',
+      build: () {
+        when(
+          () => stationsRepository.toggleLikeStation('station-001'),
+        ).thenAnswer((_) async => Right(true));
+        return StationsBloc(stationsRepository: stationsRepository);
+      },
+      act: (bloc) => bloc.add(
+        ToggleLikeStationEvent(id: 'station-001'),
+      ),
+      verify: (bloc) => verify(
+        () => stationsRepository.toggleLikeStation('station-001'),
+      ).called(1),
+    );
   });
+
+  blocTest<StationsBloc, StationsState>(
+    'GetLikedStationsEvent should emit stationsListMock',
+    build: () {
+      when(() => stationsRepository.getLikedStations()).thenAnswer(
+        (_) async => Right(stationListMock),
+      );
+      return StationsBloc(stationsRepository: stationsRepository);
+    },
+    act: (bloc) => bloc.add(GetLikedStationsEvent()),
+    expect: () => [
+      StationsLoading(),
+      StationsLoaded(stations: stationListMock),
+    ],
+  );
+
+  blocTest<StationsBloc, StationsState>(
+    'GetLikedStationsEvent should emit StationsError',
+    build: () {
+      when(() => stationsRepository.getLikedStations()).thenAnswer(
+        (_) async => Left(ServerFailure('Failed to fetch stations')),
+      );
+      return StationsBloc(stationsRepository: stationsRepository);
+    },
+    act: (bloc) => bloc.add(GetLikedStationsEvent()),
+    expect: () => [
+      StationsLoading(),
+      StationsError(errorMessage: 'Failed to fetch stations'),
+    ],
+  );
 }
