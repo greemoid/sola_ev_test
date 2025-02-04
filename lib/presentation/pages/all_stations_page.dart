@@ -21,6 +21,10 @@ class _AllStationsPageState extends State<AllStationsPage> {
     context.read<StationsBloc>().add(GetAllStationsEvent());
   }
 
+  void _toggleStar(String id) {
+    context.read<StationsBloc>().add(ToggleLikeStationEvent(id: id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -60,7 +64,9 @@ class _AllStationsPageState extends State<AllStationsPage> {
                       maxPower: maxPower ?? 0,
                       textTheme: widget.textTheme,
                       isFavorite: station.isFavorite,
-                      onFavoritePressed: () {},
+                      onFavoritePressed: () {
+                        _toggleStar(station.id ?? '');
+                      },
                       onButtonPressed: () {},
                       onArrowPressed: () {},
                       price: station.price ?? 0.0,

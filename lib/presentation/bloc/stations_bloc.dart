@@ -13,16 +13,18 @@ class StationsBloc extends Bloc<StationsEvent, StationsState> {
   StationsBloc({required IStationsRepository stationsRepository})
       : _stationsRepository = stationsRepository,
         super(StationsInitial()) {
-    on<StationsEvent>((event, emit) {
-      emit(StationsLoading());
-    });
+    on<StationsEvent>((event, emit) {});
 
     on<GetAllStationsEvent>(_getAllStations);
     on<GetStationByIdEvent>(_getStationById);
+    on<GetLikedStationsEvent>(_getLikedStations);
+    on<ToggleLikeStationEvent>(_toggleLike);
   }
 
   Future<void> _getAllStations(
       GetAllStationsEvent event, Emitter<StationsState> emit) async {
+    emit(StationsLoading());
+
     final result = await _stationsRepository.getAllStations();
 
     result.fold(
@@ -37,6 +39,8 @@ class StationsBloc extends Bloc<StationsEvent, StationsState> {
 
   Future<void> _getStationById(
       GetStationByIdEvent event, Emitter<StationsState> emit) async {
+    emit(StationsLoading());
+
     final result = await _stationsRepository.getStationById(event.id);
 
     result.fold(
@@ -47,5 +51,26 @@ class StationsBloc extends Bloc<StationsEvent, StationsState> {
         StationByIdLoaded(station: station),
       ),
     );
+  }
+
+  Future<void> _getLikedStations(
+      GetLikedStationsEvent event, Emitter<StationsState> emit) async {
+    emit(StationsLoading());
+
+    final result = await _stationsRepository.getLikedStations();
+
+    result.fold(
+      (failure) => emit(
+        StationsError(errorMessage: failure.message),
+      ),
+      (stations) => emit(
+        StationsLoaded(stations: stations),
+      ),
+    );
+  }
+
+  Future<void> _toggleLike(
+      ToggleLikeStationEvent event, Emitter<StationsState> emit) async {
+    await _stationsRepository.toggleLikeStation(event.id);
   }
 }

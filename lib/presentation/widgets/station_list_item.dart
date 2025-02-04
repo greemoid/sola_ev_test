@@ -45,7 +45,7 @@ class _StationListItemState extends State<StationListItem> {
     setState(() {
       isItemFavorite = !isItemFavorite;
     });
-    widget.onFavoritePressed;
+    widget.onFavoritePressed();
   }
 
   @override
