@@ -44,6 +44,7 @@ dependencies:
   fpdart: ^1.1.1
   mocktail: ^1.0.4
   flutter_svg: ^2.0.17
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
