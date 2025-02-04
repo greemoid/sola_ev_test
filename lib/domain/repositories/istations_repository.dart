@@ -10,5 +10,5 @@ abstract interface class IStationsRepository {
 
   Future<Either<Failure, List<Station>>> getLikedStations();
 
-  Future<Either<Failure, void>> toggleLikeStation(String id);
+  Future<Either<Failure, bool>> toggleLikeStation(String id);
 }

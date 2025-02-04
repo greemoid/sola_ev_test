@@ -5,9 +5,9 @@ import 'package:sola_ev_test/presentation/bloc/stations_bloc.dart';
 import 'package:sola_ev_test/presentation/pages/all_stations_page.dart';
 import 'package:sola_ev_test/presentation/theme/export.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initDependencies();
+  await initDependencies();
   runApp(const MyApp());
 }
 
