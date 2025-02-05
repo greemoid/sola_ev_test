@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:sola_ev_test/presentation/widgets/charging_station_details.dart'
 import 'package:sola_ev_test/presentation/widgets/details_container.dart';
 import 'package:sola_ev_test/presentation/widgets/favorite_icon_button.dart';
 
+@RoutePage()
 class StationDetailsPage extends StatefulWidget {
   const StationDetailsPage(
       {super.key,
@@ -37,7 +39,7 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.router.popUntilRouteWithName('/allStations'),
           icon: const Icon(Icons.arrow_back_ios),
         ),
         title: Center(
