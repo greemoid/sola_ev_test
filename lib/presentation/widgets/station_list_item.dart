@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sola_ev_test/presentation/theme/color_palette.dart';
+import 'package:sola_ev_test/presentation/utils/adjust_svg_path.dart';
 import 'package:sola_ev_test/presentation/widgets/favorite_icon_button.dart';
 
 class StationListItem extends StatefulWidget {
@@ -119,7 +120,7 @@ class _StationListItemState extends State<StationListItem> {
   Widget _buildInfoRow(String iconPath, String text) {
     return Row(
       children: [
-        SvgPicture.asset(iconPath, height: 24, width: 24),
+        SvgPicture.asset(adjustSvgPath(iconPath), height: 24, width: 24),
         const SizedBox(width: 4),
         Expanded(
           child: Text(
@@ -168,7 +169,7 @@ class _StationListItemState extends State<StationListItem> {
             ),
             alignment: Alignment.center,
             child: SvgPicture.asset(
-              'icons/arrow_right_up.svg',
+              adjustSvgPath('icons/arrow_right_up.svg'),
               height: 24,
               width: 24,
             ),

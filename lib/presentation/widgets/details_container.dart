@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sola_ev_test/presentation/theme/color_palette.dart';
+import 'package:sola_ev_test/presentation/utils/adjust_svg_path.dart';
 
 class DetailsContainer extends StatelessWidget {
   const DetailsContainer({
@@ -27,7 +28,7 @@ class DetailsContainer extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(
-              svgPath,
+              adjustSvgPath(svgPath),
               height: 40,
               width: 40,
             ),
