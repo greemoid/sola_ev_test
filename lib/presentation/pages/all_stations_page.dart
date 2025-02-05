@@ -39,6 +39,7 @@ class _AllStationsPageState extends State<AllStationsPage> {
               builder: (context, constraints) {
                 int crossAxisCount = constraints.maxWidth > 600 ? 2 : 1;
                 return GridView.builder(
+                  key: PageStorageKey('list'),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: 8,
@@ -50,33 +51,34 @@ class _AllStationsPageState extends State<AllStationsPage> {
                     final station = state.stations[index];
                     final maxPower =
                         findMaxPower(station.connectors ?? []) ?? 0.0;
-                    return StationListItem(
-                      title: station.title ?? '',
-                      address: station.address ?? '',
-                      imageUrl: station.imageUrl ?? '',
-                      maxPower: maxPower,
-                      textTheme: textTheme,
-                      isFavorite: station.isFavorite,
-                      onFavoritePressed: () {
-                        _toggleStar(station.id ?? '');
-                      },
-                      onButtonPressed: () {},
-                      onArrowPressed: () {
-                        context.router.pushNamed('/details/${station.id}');
-                      },
-                      price: station.price ?? 0.0,
+                    return Hero(
+                      tag: station.id ?? '',
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: StationListItem(
+                          title: station.title ?? '',
+                          address: station.address ?? '',
+                          imageUrl: station.imageUrl ?? '',
+                          maxPower: maxPower,
+                          textTheme: textTheme,
+                          isFavorite: station.isFavorite,
+                          onFavoritePressed: () {
+                            _toggleStar(station.id ?? '');
+                          },
+                          onButtonPressed: () {},
+                          onArrowPressed: () {
+                            context.router.pushNamed('/details/${station.id}');
+                          },
+                          price: station.price ?? 0.0,
+                        ),
+                      ),
                     );
                   },
                 );
               },
             );
           } else {
-            return Center(
-              child: Text(
-                'Something went wrong',
-                style: textTheme.bodyLarge,
-              ),
-            );
+            return SizedBox.shrink();
           }
         },
       ),
