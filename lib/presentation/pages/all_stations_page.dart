@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sola_ev_test/presentation/bloc/stations_bloc.dart';
+import 'package:sola_ev_test/presentation/pages/station_details_page.dart';
+import 'package:sola_ev_test/presentation/utils/find_max_power.dart';
 import 'package:sola_ev_test/presentation/widgets/station_list_item.dart';
 
 class AllStationsPage extends StatefulWidget {
@@ -54,21 +54,30 @@ class _AllStationsPageState extends State<AllStationsPage> {
                   itemCount: state.stations.length,
                   itemBuilder: (context, index) {
                     final station = state.stations[index];
-                    final num? maxPower = station.connectors
-                        ?.map((c) => c.maxPower ?? 0)
-                        .reduce((a, b) => max(a, b));
+                    final maxPower =
+                        findMaxPower(station.connectors ?? []) ?? 0.0;
                     return StationListItem(
                       title: station.title ?? '',
                       address: station.address ?? '',
                       imageUrl: station.imageUrl ?? '',
-                      maxPower: maxPower ?? 0,
+                      maxPower: maxPower,
                       textTheme: widget.textTheme,
                       isFavorite: station.isFavorite,
                       onFavoritePressed: () {
                         _toggleStar(station.id ?? '');
                       },
                       onButtonPressed: () {},
-                      onArrowPressed: () {},
+                      onArrowPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StationDetailsPage(
+                                    stationId: station.id ?? '',
+                                    textTheme: widget.textTheme,
+                                    isFavorite: station.isFavorite,
+                                  )),
+                        );
+                      },
                       price: station.price ?? 0.0,
                     );
                   },

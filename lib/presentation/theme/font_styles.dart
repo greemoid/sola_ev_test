@@ -3,7 +3,7 @@ import 'package:sola_ev_test/presentation/theme/color_palette.dart';
 
 class FontStyles {
   static const double _extraLargeFontSize = 32;
-  static const double _mediumLargeFontSize = 20;
+  static const double _mediumLargeFontSize = 24;
   static const double _bodyLargeFontSize = 20;
   static const double _bodyMediumFontSize = 15;
   static const double _bodySmallFontSize = 13;

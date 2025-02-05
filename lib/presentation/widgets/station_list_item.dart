@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sola_ev_test/presentation/theme/color_palette.dart';
+import 'package:sola_ev_test/presentation/widgets/favorite_icon_button.dart';
 
 class StationListItem extends StatefulWidget {
   final String title;
@@ -98,15 +99,10 @@ class _StationListItemState extends State<StationListItem> {
             ],
           ),
         ),
-        IconButton(
-          icon: Icon(
-            Icons.star,
-            color: isItemFavorite
-                ? ColorPalette.favoriteStarColor
-                : ColorPalette.secondaryTextColor,
-          ),
-          onPressed: _toggleLikeUI,
-        ),
+        FavoriteIconButton(
+          isItemFavorite: isItemFavorite,
+          toggleLikeUI: _toggleLikeUI,
+        )
       ],
     );
   }
