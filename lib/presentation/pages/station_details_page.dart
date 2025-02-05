@@ -10,15 +10,12 @@ import 'package:sola_ev_test/presentation/widgets/favorite_icon_button.dart';
 
 @RoutePage()
 class StationDetailsPage extends StatefulWidget {
-  const StationDetailsPage(
-      {super.key,
-      required this.stationId,
-      required this.textTheme,
-      required this.isFavorite});
+  const StationDetailsPage({
+    super.key,
+    @PathParam('stationId') required this.stationId,
+  });
 
   final String stationId;
-  final TextTheme textTheme;
-  final bool isFavorite;
 
   @override
   State<StationDetailsPage> createState() => _StationDetailsPageState();
@@ -30,30 +27,42 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
   @override
   void initState() {
     super.initState();
-    isItemFavorite = widget.isFavorite;
     context.read<StationsBloc>().add(GetStationByIdEvent(id: widget.stationId));
   }
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => context.router.popUntilRouteWithName('/allStations'),
+          onPressed: () => context.router.popForced(),
           icon: const Icon(Icons.arrow_back_ios),
         ),
         title: Center(
-          child: Text('Details', style: widget.textTheme.titleMedium),
+          child: Text(context.router.current.title(context),
+              style: textTheme.titleMedium),
         ),
         actions: [
-          FavoriteIconButton(
-            isItemFavorite: isItemFavorite,
-            toggleLikeUI: () {
-              setState(() => isItemFavorite = !isItemFavorite);
-              context
-                  .read<StationsBloc>()
-                  .add(ToggleLikeStationEvent(id: widget.stationId));
+          BlocListener<StationsBloc, StationsState>(
+            listener: (context, state) {
+              if (state is StationByIdLoaded) {
+                setState(() {
+                  isItemFavorite = state.station.isFavorite;
+                });
+              }
             },
+            child: FavoriteIconButton(
+              isItemFavorite: isItemFavorite,
+              toggleLikeUI: () {
+                setState(() {
+                  isItemFavorite = !isItemFavorite;
+                });
+                context
+                    .read<StationsBloc>()
+                    .add(ToggleLikeStationEvent(id: widget.stationId));
+              },
+            ),
           )
         ],
       ),
@@ -61,8 +70,7 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
         builder: (context, state) {
           if (state is StationsError) {
             return Center(
-                child: Text(state.errorMessage,
-                    style: widget.textTheme.bodyLarge));
+                child: Text(state.errorMessage, style: textTheme.bodyLarge));
           } else if (state is StationsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is StationByIdLoaded) {
@@ -84,8 +92,7 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
                     fit: BoxFit.fitHeight,
                   ),
                   const SizedBox(height: 16),
-                  Text(station.title ?? '',
-                      style: widget.textTheme.titleMedium),
+                  Text(station.title ?? '', style: textTheme.titleMedium),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,13 +101,13 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
                       DetailsContainer(
                         svgPath: 'icons/lighting.svg',
                         description: 'Max power',
-                        textTheme: widget.textTheme,
+                        textTheme: textTheme,
                         property: '$maxPower kW',
                       ),
                       DetailsContainer(
                         svgPath: 'icons/dollar.svg',
                         description: 'Price',
-                        textTheme: widget.textTheme,
+                        textTheme: textTheme,
                         property: '\$${station.price ?? 0.0}',
                       )
                     ],
@@ -111,7 +118,7 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
                     connectors:
                         availableConnectors.map((c) => '${c.type}').join(', '),
                     availability: isPublic ? 'Public' : 'Private',
-                    textTheme: widget.textTheme,
+                    textTheme: textTheme,
                   ),
                   const SizedBox(height: 16),
                   OutlinedButton(
@@ -123,8 +130,8 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
             );
           } else {
             return Center(
-                child: Text('Something went wrong',
-                    style: widget.textTheme.bodyLarge));
+                child:
+                    Text('Something went wrong', style: textTheme.bodyLarge));
           }
         },
       ),

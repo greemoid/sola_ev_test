@@ -17,13 +17,15 @@ class AppRouter extends RootStackRouter {
           children: [
             AutoRoute(
               path: 'all_stations',
+              title: (context, data) => 'SOLA',
               page: AllStationsRoute.page,
             ),
           ],
         ),
-    AutoRoute(
-      path: '/details',
-      page: StationDetailsRoute.page,
-    ),
+        AutoRoute(
+          title: (context, data) => 'Details',
+          path: '/details/:stationId',
+          page: StationDetailsRoute.page,
+        ),
       ];
 }

@@ -1,34 +1,26 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sola_ev_test/core/router/app_router.dart';
 import 'package:sola_ev_test/presentation/bloc/stations_bloc.dart';
 import 'package:sola_ev_test/presentation/utils/find_max_power.dart';
 import 'package:sola_ev_test/presentation/widgets/station_list_item.dart';
 
 @RoutePage()
 class AllStationsPage extends StatefulWidget {
-  const AllStationsPage({super.key, required this.textTheme});
-
-  final TextTheme textTheme;
+  const AllStationsPage({super.key});
 
   @override
   State<AllStationsPage> createState() => _AllStationsPageState();
 }
 
 class _AllStationsPageState extends State<AllStationsPage> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<StationsBloc>().add(GetAllStationsEvent());
-  }
-
   void _toggleStar(String id) {
     context.read<StationsBloc>().add(ToggleLikeStationEvent(id: id));
   }
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: BlocBuilder<StationsBloc, StationsState>(
@@ -39,7 +31,7 @@ class _AllStationsPageState extends State<AllStationsPage> {
             return Center(
               child: Text(
                 state.errorMessage,
-                style: widget.textTheme.bodyLarge,
+                style: textTheme.bodyLarge,
               ),
             );
           } else if (state is StationsLoaded) {
@@ -63,29 +55,14 @@ class _AllStationsPageState extends State<AllStationsPage> {
                       address: station.address ?? '',
                       imageUrl: station.imageUrl ?? '',
                       maxPower: maxPower,
-                      textTheme: widget.textTheme,
+                      textTheme: textTheme,
                       isFavorite: station.isFavorite,
                       onFavoritePressed: () {
                         _toggleStar(station.id ?? '');
                       },
                       onButtonPressed: () {},
                       onArrowPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => StationDetailsPage(
-                        //             stationId: station.id ?? '',
-                        //             textTheme: widget.textTheme,
-                        //             isFavorite: station.isFavorite,
-                        //           )),
-                        // );
-                        context.router.push(
-                          StationDetailsRoute(
-                            stationId: station.id ?? '',
-                            textTheme: widget.textTheme,
-                            isFavorite: station.isFavorite,
-                          ),
-                        );
+                        context.router.pushNamed('/details/${station.id}');
                       },
                       price: station.price ?? 0.0,
                     );
@@ -97,7 +74,7 @@ class _AllStationsPageState extends State<AllStationsPage> {
             return Center(
               child: Text(
                 'Something went wrong',
-                style: widget.textTheme.bodyLarge,
+                style: textTheme.bodyLarge,
               ),
             );
           }
