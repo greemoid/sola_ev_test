@@ -7,7 +7,7 @@ import 'package:sola_ev_test/core/di/init_dependencies.dart';
 import 'package:sola_ev_test/core/router/app_router.dart';
 import 'package:sola_ev_test/presentation/bloc/stations_bloc.dart';
 import 'package:sola_ev_test/presentation/pages/all_stations_page.dart';
-import 'package:sola_ev_test/presentation/theme/export.dart';
+import 'package:sola_ev_test/presentation/theme/theme.dart';
 import 'package:sola_ev_test/presentation/utils/stations_route_observer.dart';
 
 Future<void> main() async {
