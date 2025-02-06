@@ -10,6 +10,7 @@ This Flutter application displays a list of EV charging stations, allows users t
 - **Smooth UI/UX:**
     - `Hero` animations enhance navigation transitions.
     - `cached_network_image` optimizes image loading.
+    - My design is adaptive and optimized for both small devices like the iPhone SE and larger ones such as tablets, including newer foldable devices, which could be popular among the target audience for this app.
 - **Navigation:** Implemented with `auto_route`, supporting web navigation.
 - **Testing:** Includes unit and widget tests using `mocktail`.
 
@@ -40,6 +41,11 @@ flutter run
 I was trying to make the repository is well-structured. Feel free to explore the code organization in my [GitHub repository](https://github.com/greemoid/sola_ev_test).
 
 ## Demo
-📽️ *Presentation video coming soon...*
+📽️ In the video, you'll be able to see the app's design adaptability, smooth animations, and the feature where favorites are retained even after restarting the app. 
+
+Apologies for the lag in the video, but it's presented on a Linux app version because the Android emulator causes even more performance issues during video playback.
+
+https://github.com/user-attachments/assets/fcfcaed6-0e10-4a8e-9b14-4ba14726f90d
+
 
 
