@@ -37,7 +37,7 @@ flutter run
 ```
 
 ## Project Structure
-The repository is well-structured and follows clean architecture principles. Feel free to explore the code organization in my [GitHub repository](https://github.com/greemoid/sola_ev_test).
+I was trying to make the repository is well-structured. Feel free to explore the code organization in my [GitHub repository](https://github.com/greemoid/sola_ev_test).
 
 ## Demo
 📽️ *Presentation video coming soon...*
