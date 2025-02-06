@@ -7,13 +7,14 @@ import 'package:sola_ev_test/data/models/station_model.dart';
 import '../../core/utils.dart';
 
 class NetworkDataSource implements INetworkDataSource {
-  final AssetBundle assetBundle;
+  final AssetBundle _assetBundle;
 
-  NetworkDataSource({required this.assetBundle});
+  NetworkDataSource({required AssetBundle assetBundle})
+      : _assetBundle = assetBundle;
 
   @override
   Future<List<StationModel>> getAllStations() async {
-    final jsonString = await assetBundle.loadString(assetsPath);
+    final jsonString = await _assetBundle.loadString(assetsPath);
     final List<dynamic> jsonList = json.decode(jsonString);
     return jsonList.map((json) => StationModel.fromJson(json)).toList();
   }
@@ -22,7 +23,7 @@ class NetworkDataSource implements INetworkDataSource {
   // the real project with real API that allows get one item by id
   @override
   Future<StationModel?> getStationById(String id) async {
-    final jsonString = await assetBundle.loadString(assetsPath);
+    final jsonString = await _assetBundle.loadString(assetsPath);
     final List<dynamic> jsonList = json.decode(jsonString);
     final stationJson = jsonList.firstWhere((station) => station['id'] == id,
         orElse: () => null);
@@ -34,7 +35,7 @@ class NetworkDataSource implements INetworkDataSource {
 
   @override
   Future<List<StationModel>?> getLikedStations(List<String> likedIds) async {
-    final jsonString = await assetBundle.loadString(assetsPath);
+    final jsonString = await _assetBundle.loadString(assetsPath);
     final List<dynamic> jsonList = json.decode(jsonString);
     final stationsList =
         jsonList.where((station) => likedIds.contains(station['id'])).toList();

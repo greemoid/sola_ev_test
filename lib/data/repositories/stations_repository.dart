@@ -7,21 +7,22 @@ import 'package:sola_ev_test/domain/entities/station.dart';
 import 'package:sola_ev_test/domain/repositories/istations_repository.dart';
 
 class StationsRepository implements IStationsRepository {
-  final INetworkDataSource networkDataSource;
-  final ILocalDataSource localDataSource;
+  final INetworkDataSource _networkDataSource;
+  final ILocalDataSource _localDataSource;
 
   StationsRepository({
-    required this.networkDataSource,
-    required this.localDataSource,
-  });
+    required INetworkDataSource networkDataSource,
+    required ILocalDataSource localDataSource,
+  })  : _localDataSource = localDataSource,
+        _networkDataSource = networkDataSource;
 
   @override
   Future<Either<Failure, List<Station>>> getAllStations() async {
     try {
-      final response = await networkDataSource.getAllStations();
+      final response = await _networkDataSource.getAllStations();
 
       final result = response.map((responseModel) {
-        final ids = localDataSource.getLikedStationsIds();
+        final ids = _localDataSource.getLikedStationsIds();
         final isFavorite = ids?.contains(responseModel.id) ?? false;
         return responseModel.toStation(isFavorite);
       }).toList();
@@ -35,11 +36,11 @@ class StationsRepository implements IStationsRepository {
   @override
   Future<Either<Failure, Station>> getStationById(String id) async {
     try {
-      final response = await networkDataSource.getStationById(id);
+      final response = await _networkDataSource.getStationById(id);
       if (response == null) {
         return Either.left(ServerFailure("Can't find such station"));
       } else {
-        final ids = localDataSource.getLikedStationsIds();
+        final ids = _localDataSource.getLikedStationsIds();
         final isFavorite = ids?.contains(response.id) ?? false;
         final result = response.toStation(isFavorite);
 
@@ -53,8 +54,8 @@ class StationsRepository implements IStationsRepository {
   @override
   Future<Either<Failure, List<Station>>> getLikedStations() async {
     try {
-      final ids = localDataSource.getLikedStationsIds() ?? [];
-      final response = await networkDataSource.getLikedStations(ids);
+      final ids = _localDataSource.getLikedStationsIds() ?? [];
+      final response = await _networkDataSource.getLikedStations(ids);
 
       if (response == null) {
         return Either.left(ServerFailure("Can't find any station"));
@@ -75,7 +76,7 @@ class StationsRepository implements IStationsRepository {
   @override
   Future<Either<Failure, bool>> toggleLikeStation(String id) async {
     try {
-      final result = await localDataSource.toggleLikeStation(id);
+      final result = await _localDataSource.toggleLikeStation(id);
       return Either.right(result);
     } catch (e) {
       return Either.left(CacheFailure(e.toString()));
