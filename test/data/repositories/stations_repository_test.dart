@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:sola_ev_test/core/export.dart';
+import 'package:sola_ev_test/core/failure.dart';
 import 'package:sola_ev_test/data/datasources/ilocal_data_source.dart';
 import 'package:sola_ev_test/data/datasources/inetwork_data_source.dart';
 import 'package:sola_ev_test/data/repositories/stations_repository.dart';
