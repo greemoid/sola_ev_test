@@ -3,11 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sola_ev_test/presentation/bloc/stations_bloc.dart';
-import 'package:sola_ev_test/presentation/theme/color_palette.dart';
 import 'package:sola_ev_test/presentation/utils/find_max_power.dart';
 import 'package:sola_ev_test/presentation/widgets/charging_station_details.dart';
 import 'package:sola_ev_test/presentation/widgets/details_container.dart';
 import 'package:sola_ev_test/presentation/widgets/favorite_icon_button.dart';
+import 'package:sola_ev_test/presentation/widgets/primary_button.dart';
 
 @RoutePage()
 class StationDetailsPage extends StatefulWidget {
@@ -128,22 +128,18 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
                         textTheme: textTheme,
                       ),
                       const SizedBox(height: 16),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: ColorPalette.primaryColor,
-                            borderRadius: BorderRadius.circular(42),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Call to action',
-                            style: textTheme.bodyMedium
-                                ?.copyWith(color: Colors.black),
-                          ),
-                        ),
-                      ),
+                      PrimaryButton(
+                          onButtonPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(64),
+                                    child: Text('Will be soon'),
+                                  );
+                                });
+                          },
+                          textTheme: textTheme),
                     ],
                   ),
                 );

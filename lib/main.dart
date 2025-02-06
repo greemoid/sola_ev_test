@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +13,12 @@ import 'package:sola_ev_test/presentation/utils/stations_route_observer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
+
   runApp(MyApp());
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+  };
 }
 
 class MyApp extends StatelessWidget {

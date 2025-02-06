@@ -55,21 +55,27 @@ class _AllStationsPageState extends State<AllStationsPage> {
                       tag: station.id ?? '',
                       child: Material(
                         type: MaterialType.transparency,
-                        child: StationListItem(
-                          title: station.title ?? '',
-                          address: station.address ?? '',
-                          imageUrl: station.imageUrl ?? '',
-                          maxPower: maxPower,
-                          textTheme: textTheme,
-                          isFavorite: station.isFavorite,
-                          onFavoritePressed: () {
-                            _toggleStar(station.id ?? '');
-                          },
-                          onButtonPressed: () {},
-                          onArrowPressed: () {
+                        child: GestureDetector(
+                          onTap: () {
                             context.router.pushNamed('/details/${station.id}');
                           },
-                          price: station.price ?? 0.0,
+                          child: StationListItem(
+                            title: station.title ?? '',
+                            address: station.address ?? '',
+                            imageUrl: station.imageUrl ?? '',
+                            maxPower: maxPower,
+                            textTheme: textTheme,
+                            isFavorite: station.isFavorite,
+                            onFavoritePressed: () {
+                              _toggleStar(station.id ?? '');
+                            },
+                            onButtonPressed: () {},
+                            onArrowPressed: () {
+                              context.router
+                                  .pushNamed('/details/${station.id}');
+                            },
+                            price: station.price ?? 0.0,
+                          ),
                         ),
                       ),
                     );

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sola_ev_test/presentation/theme/color_palette.dart';
 import 'package:sola_ev_test/presentation/utils/adjust_svg_path.dart';
+import 'package:sola_ev_test/presentation/widgets/details_button.dart';
 import 'package:sola_ev_test/presentation/widgets/favorite_icon_button.dart';
+import 'package:sola_ev_test/presentation/widgets/primary_button.dart';
 
 class StationListItem extends StatefulWidget {
   final String title;
@@ -137,44 +139,21 @@ class _StationListItemState extends State<StationListItem> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: GestureDetector(
-            onTap: widget.onButtonPressed,
-            child: Container(
-              height: 48,
-              decoration: BoxDecoration(
-                color: ColorPalette.primaryColor,
-                borderRadius: BorderRadius.circular(42),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                'Call to action',
-                style:
-                    widget.textTheme.bodyMedium?.copyWith(color: Colors.black),
-              ),
-            ),
-          ),
+          child: PrimaryButton(
+              onButtonPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.all(64),
+                        child: Text('Will be soon'),
+                      );
+                    });
+              },
+              textTheme: widget.textTheme),
         ),
         const SizedBox(width: 8),
-        GestureDetector(
-          onTap: widget.onArrowPressed,
-          child: Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: ColorPalette.primaryColor,
-                width: 2,
-              ),
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              adjustSvgPath('icons/arrow_right_up.svg'),
-              height: 24,
-              width: 24,
-            ),
-          ),
-        ),
+        DetailsButton(onArrowPressed: widget.onArrowPressed),
       ],
     );
   }
