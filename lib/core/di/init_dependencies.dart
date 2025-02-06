@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sola_ev_test/core/router/app_router.dart';
 import 'package:sola_ev_test/data/datasources/ilocal_data_source.dart';
 import 'package:sola_ev_test/data/datasources/inetwork_data_source.dart';
 import 'package:sola_ev_test/data/datasources/local_data_source.dart';

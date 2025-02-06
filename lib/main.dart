@@ -14,17 +14,17 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
 
-  runApp(MyApp());
-
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
   };
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _appRouter = AppRouter();
+  final _appRouter = serviceLocator<AppRouter>();
 
   @override
   Widget build(BuildContext context) {

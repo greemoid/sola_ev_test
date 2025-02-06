@@ -5,6 +5,7 @@ final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   serviceLocator
+    ..registerSingleton<AppRouter>(AppRouter())
     ..registerFactory<INetworkDataSource>(
         () => NetworkDataSource(assetBundle: rootBundle))
     ..registerFactory<ILocalDataSource>(
