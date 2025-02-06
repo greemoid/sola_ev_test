@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (_) => serviceLocator<StationsBloc>(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: _appRouter.config(
           navigatorObservers: () => [
             StationsRouteObserver(),
