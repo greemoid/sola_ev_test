@@ -45,8 +45,7 @@ class _StationDetailsPageState extends State<StationDetailsPage> {
               icon: const Icon(Icons.arrow_back_ios),
             ),
             title: Center(
-              child: Text(context.router.current.title(context),
-                  style: textTheme.titleMedium),
+              child: Text('Details', style: textTheme.titleMedium),
             ),
             actions: [
               BlocListener<StationsBloc, StationsState>(
